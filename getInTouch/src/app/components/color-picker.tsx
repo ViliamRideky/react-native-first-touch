@@ -1,10 +1,9 @@
-import { Text, View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
-export default function Index() {
+export default function ColorPickerFallback() {
   return (
     <View style={styles.container}>
-      <Text>Random text try</Text>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
+      <Text>Color picker is not supported on this platform.</Text>
     </View>
   );
 }
