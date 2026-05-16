@@ -4,11 +4,13 @@ import { useEffect } from "react";
 export default function RootLayout() {
   const router = useRouter();
 
-  let isAuth = false;
+  let isAuth = false; // test auth, true value route to tabs
 
   useEffect(() => {
     if (!isAuth) {
       router.replace("/(auth)/login");
+    } else {
+      router.replace("/(tabs)");
     }
   });
 
