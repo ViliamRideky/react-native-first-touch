@@ -43,7 +43,7 @@ export default function LoginScreen() {
         <TouchableOpacity style={styles.linkButton} onPress={navigateToSignUp}>
           <Text style={styles.linkButtonText}>
             Don't have an account?{" "}
-            <Text style={styles.linkButtonTextBold}>Sing up</Text>
+            <Text style={styles.linkButtonTextBold}>Sing Up</Text>
           </Text>
         </TouchableOpacity>
       </View>
