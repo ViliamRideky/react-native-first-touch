@@ -42,8 +42,8 @@ export default function SignUpScreen() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.linkButton} onPress={navigateToSignIn}>
           <Text style={styles.linkButtonText}>
-            Alredy have an account?{" "}
-            <Text style={styles.linkButtonTextBold}>Sing In</Text>
+            Already have an account?{" "}
+            <Text style={styles.linkButtonTextBold}>Sign In</Text>
           </Text>
         </TouchableOpacity>
       </View>
