@@ -1,18 +1,41 @@
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpScreen() {
   const router = useRouter();
+  const { signUp } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigateToSignIn = () => {
     router.push("/(auth)/login");
+  };
+
+  const handleSignUp = async () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please, fill in all fields");
+    }
+
+    if (password.length < 5) {
+      Alert.alert("Error", "Password must be at least 5 characters");
+    }
+
+    try {
+      await signUp(email, password);
+    } catch (erorr) {
+      Alert.alert("Error", "Failed to sign up. Please try again.");
+    }
   };
 
   return (
@@ -26,6 +49,8 @@ export default function SignUpScreen() {
             placeholderTextColor={"#999"}
             keyboardType="email-address"
             autoComplete="email"
+            value={email}
+            onChangeText={setEmail}
             style={styles.input}
           />
           <TextInput
@@ -34,10 +59,12 @@ export default function SignUpScreen() {
             autoComplete="password"
             secureTextEntry
             autoCapitalize="none"
+            value={password}
+            onChangeText={setPassword}
             style={styles.input}
           />
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.linkButton} onPress={navigateToSignIn}>
