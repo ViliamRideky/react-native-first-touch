@@ -8,6 +8,7 @@ import {
   View,
   StyleSheet,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -17,6 +18,7 @@ export default function SignUpScreen() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigateToSignIn = () => {
     router.push("/(auth)/login");
@@ -31,10 +33,13 @@ export default function SignUpScreen() {
       Alert.alert("Error", "Password must be at least 5 characters");
     }
 
+    setIsLoading(true);
     try {
       await signUp(email, password);
-    } catch (erorr) {
+    } catch (error) {
       Alert.alert("Error", "Failed to sign up. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -65,7 +70,11 @@ export default function SignUpScreen() {
           />
         </View>
         <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>Sign Up</Text>
+          {isLoading ? (
+            <ActivityIndicator size={24} color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Sign Up</Text>
+          )}
         </TouchableOpacity>
         <TouchableOpacity style={styles.linkButton} onPress={navigateToSignIn}>
           <Text style={styles.linkButtonText}>
